@@ -13,16 +13,18 @@ def create_app(config_name=None):
     if config_name is None:
         config_name = "development"
 
+    app.secret_key = 'secret-key'
     app.config.from_object(CONFIG_NAME_MAPPER[config_name])
 
     # Register extensions
-    from extensions import db, cors, ma
+    from extensions import db, cors, ma, login_manager
     db.init_app(app)
     cors.init_app(app)
     ma.init_app(app)
+    login_manager.init_app(app)
 
     # Register Blueprints
-    from api.tracks import api_tracks_bp
-    app.register_blueprint(api_tracks_bp, url_prefix="/api/v1")
+    from api import api_users_bp
+    app.register_blueprint(api_users_bp, url_prefix="/api/v1")
 
     return app
