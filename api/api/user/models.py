@@ -1,48 +1,27 @@
 from extensions import db
 from uuid import uuid4
 from datetime import datetime
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
-class Track(db.Model):
-    uuid = db.Column(db.String(36), primary_key=True,
-                     default=lambda: str(uuid4()))
 
-
-class Coordinate(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    track_uuid = db.Column(db.String(36), nullable=False)
-    latitude = db.Column(db.Float, nullable=False)
-    longitude = db.Column(db.Float, nullable=False)
-    datetime_at = db.Column(db.DateTime, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
+    username = db.Column(db.String(20), nullable=False, unique=True)
+    email = db.Column(db.String(20), nullable=False, unique=True)
+    password = db.Column(db.String(20), nullable=False)
+    city = db.Column(db.String(20), nullable=True)
+
+    def set_password(self, password):
+        self.password = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
 
     def __repr__(self):
-        return "<Coordinate: latitude={}, longitude={}, datetime=\"{}\">\n"\
-            .format(self.latitude, self.longitude, self.datetime_at)
+	    return "<{}:{}>".format(self.id, self.username)
 
-
-class Sensor(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    track_uuid = db.Column(db.String(36), nullable=False)
-    accelerometerX = db.Column(db.Float, nullable=False)
-    accelerometerY = db.Column(db.Float, nullable=False)
-    accelerometerZ = db.Column(db.Float, nullable=False)
-    gyroscopeX = db.Column(db.Float, nullable=False)
-    gyroscopeY = db.Column(db.Float, nullable=False)
-    gyroscopeZ = db.Column(db.Float, nullable=False)
-    magnetometerX = db.Column(db.Float, nullable=False)
-    magnetometerY = db.Column(db.Float, nullable=False)
-    magnetometerZ = db.Column(db.Float, nullable=False)
-    datetime_at = db.Column(db.String, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False,
-                           default=datetime.utcnow)
-
-    def __repr__(self):
-        return "<Sensors: accelerometer=[{}, {}, {}], " \
-               "gyroscope=[{}, {}, {}], magnetometer=[{}, {}, {}], " \
-               "datetime=\"{}\">\n" \
-            .format(self.accelerometerX, self.accelerometerY,
-                    self.accelerometerZ, self.gyroscopeX, self.gyroscopeY,
-                    self.gyroscopeZ, self.magnetometerX, self.magnetometerY,
-                    self.magnetometerZ, self.datetime_at)
+    # def __repr__(self):
+    #     return "<User: username={}, email={}, city=\"{}\">\n"\
+    #         .format(self.username, self.email, self.city)
