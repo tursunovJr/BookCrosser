@@ -4,21 +4,30 @@ from werkzeug.exceptions import HTTPException
 from api.auth.controllers import UserRegister, UserAuth, UserLogout, UserInfo
 
 from api.book.controllers import Books, BooksActions
+from api.genre.controllers import Genre, GenresActions
 
 
 api_bp = Blueprint("api", __name__)
 api = Api(api_bp)
 
 # Add resources
+
+# Auth API Module
 api.add_resource(UserRegister, "/register")
 api.add_resource(UserAuth, "/auth")
 api.add_resource(UserLogout, "/logout")
 api.add_resource(UserInfo, "/user")
 
+# Book API Module
 api.add_resource(Books, "/book")
 api.add_resource(BooksActions, "/book/<uuid:book_uuid>",
                         endpoint="book_info")
 
+
+#Genre API Module
+api.add_resource(Genre, "/genre")
+api.add_resource(GenresActions, "/genre/<uuid:genre_uuid>",
+                        endpoint="genre_info")
 
 # JSON format for error
 @api_bp.errorhandler(HTTPException)
