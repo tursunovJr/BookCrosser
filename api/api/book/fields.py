@@ -2,6 +2,7 @@ from marshmallow import fields, Schema, pre_dump
 
 class BookInfoSchema(Schema):
     uuid = fields.String(attribute="uuid")
+    holderID = fields.Integer(attribute="holderID")
     name = fields.String(attribute="name")
     author = fields.String(attribute="author")
     genre = fields.String(attribute="genre")
@@ -12,6 +13,7 @@ class BookInfoSchema(Schema):
     def group(self, data, many):
         return {
             "uuid": data.uuid,
+            "holderID": data.holderID,
             "name": data.name,
             "author": data.author,
             "genre": data.genre,
