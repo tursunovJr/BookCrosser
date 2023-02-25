@@ -7,7 +7,8 @@ from api.utils import make_response, make_empty
 from extensions import db, login_manager
 from sqlalchemy import exc
 from werkzeug.security import generate_password_hash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
+from api.auth.fields import user_info_schema
 
 
 class UserRegister(Resource):
@@ -54,7 +55,6 @@ class UserAuth(Resource):
         return make_response(401, message="Auth error")
     
 class UserLogout(Resource):
-
     @login_manager.user_loader
     def load_user(user):
         return User.query.get(int(user))
@@ -71,6 +71,21 @@ class UserLogout(Resource):
             logout_user()
             return make_response(200,message="Successful Logout")
         return make_response(401, message="Auth error")
+    
+
+class UserInfo(Resource):
+    
+    @staticmethod
+    @login_required
+    def get():
+        user = {
+            "id": current_user.id,
+            "username": current_user.username,
+            "email": current_user.email,
+            "city": current_user.city
+        }
+        return make_response(200,  **user_info_schema.dump(user))
+        
     
         
     

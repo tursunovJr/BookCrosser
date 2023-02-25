@@ -37,14 +37,13 @@ class Books(Resource):
     def get():
          """Получить информацию о всех книгах"""
 
-         
-
          books = db.session.query(BookInfo.uuid.label("uuid"), 
-                                     BookInfo.name.label("name"),
-                                     BookInfo.author.label("author"), 
-                                     BookInfo.genre.label("genre"),
-                                     BookInfo.city.label("city"), 
-                                     BookInfo.description.label("description"))\
+                                  BookInfo.holderID.label("holderID"),
+                                  BookInfo.name.label("name"),
+                                  BookInfo.author.label("author"), 
+                                  BookInfo.genre.label("genre"),
+                                  BookInfo.city.label("city"), 
+                                  BookInfo.description.label("description"))\
         .all()
          return make_response(200, books = books_schema.dump(books))
 
@@ -55,6 +54,7 @@ class BooksActions(Resource):
         """Получить информацию о книге"""
 
         book_info = db.session.query(BookInfo.uuid.label("uuid"), 
+                                     BookInfo.holderID.label("holderID"),
                                      BookInfo.name.label("name"),
                                      BookInfo.author.label("author"), 
                                      BookInfo.genre.label("genre"),
