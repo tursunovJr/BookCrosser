@@ -20,3 +20,4 @@ class BookInfoSchema(Schema):
         }
 
 book_info_schema = BookInfoSchema()
+books_schema = BookInfoSchema(many=True)

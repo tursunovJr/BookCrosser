@@ -1,8 +1,8 @@
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
-from api.user.parsers import UserSchema, UserAuthSchema
-from api.user.models import User
+from api.auth.parsers import UserSchema, UserAuthSchema
+from api.auth.models import User
 from api.utils import make_response, make_empty
 from extensions import db, login_manager
 from sqlalchemy import exc
