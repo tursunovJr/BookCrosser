@@ -1,12 +1,12 @@
 from flask import request
-from flask_restful import Resource
+from flask_restful import Resource, abort
 from marshmallow import ValidationError
 from api.blockchain.models import Transactions, Blockchain
-from api.utils import make_response, make_empty
+from api.utils import make_response
 from extensions import db
 from sqlalchemy import exc
 from api.blockchain.parsers import TransactionSchema
-from api.blockchain.fields import block_schema
+from api.blockchain.fields import blockchain_schema
 import hashlib
 from time import time
 import random
@@ -34,6 +34,23 @@ class BlockchainTransaction(Resource):
             db.session.rollback()
             return make_response(500, message="Database commit error")
         return make_response(201, message="Transaction will be added to Block")
+    
+class BlockchainAction(Resource):
+
+    @staticmethod
+    def get(bookID):
+
+        """ Get a blockchain of bookID """
+
+        chain = db.session.query(Blockchain.bookID.label("bookID"),
+                                 Blockchain.timestamp.label("timestamp"),
+                                 Blockchain.transactions.label("transactions")).filter(Blockchain.bookID.like(bookID)).all()
+        
+        if chain is None or bookID is None:
+            abort(404, message="Book info with uuid={} not found"
+                  .format(bookID))
+            
+        return make_response(200, chain = blockchain_schema.dump(chain))
     
 class BlockchainMine(Resource):
 
@@ -79,8 +96,8 @@ class BlockchainMine(Resource):
         }
 
         add_block(block)
-        # return make_response(200, block = block_schema.dump(block))
-        return make_empty(200)
+        return make_response(200, message="Block was successfully mined")
+    
     
 def delete_transaction(bookID):
     transaction = db.session.query(Transactions).filter(Transactions.bookID.like(bookID)).all()

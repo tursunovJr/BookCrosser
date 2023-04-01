@@ -1,7 +1,6 @@
 from flask import request
 from flask_restful import Resource, abort
 from marshmallow import ValidationError
-from sqlalchemy.sql import func
 from api.book.models import BookInfo
 from api.utils import make_response, make_empty
 from extensions import db

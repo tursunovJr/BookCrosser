@@ -4,7 +4,7 @@ from werkzeug.exceptions import HTTPException
 from api.auth.controllers import UserRegister, UserAuth, UserLogout, UserInfo
 from api.book.controllers import Books, BooksActions
 from api.genre.controllers import Genre, GenresActions
-from api.blockchain.controllers import BlockchainTransaction, BlockchainMine
+from api.blockchain.controllers import BlockchainTransaction, BlockchainMine, BlockchainAction
 
 
 api_bp = Blueprint("api", __name__)
@@ -20,18 +20,17 @@ api.add_resource(UserInfo, "/user")
 
 # Book API Module
 api.add_resource(Books, "/book")
-api.add_resource(BooksActions, "/book/<uuid:book_uuid>",
-                        endpoint="book_info")
+api.add_resource(BooksActions, "/book/<uuid:book_uuid>", endpoint="book_info")
 
 
 #Genre API Module
 api.add_resource(Genre, "/genre")
-api.add_resource(GenresActions, "/genre/<uuid:genre_uuid>",
-                        endpoint="genre_info")
+api.add_resource(GenresActions, "/genre/<uuid:genre_uuid>", endpoint="genre_info")
 
 #Blockchain API Module
 api.add_resource(BlockchainTransaction, "/transaction/new")
 api.add_resource(BlockchainMine, "/mine")
+api.add_resource(BlockchainAction, "/chain/<int:bookID>", endpoint="chain")
 
 # JSON format for error
 @api_bp.errorhandler(HTTPException)
