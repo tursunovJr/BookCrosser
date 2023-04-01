@@ -1,19 +1,15 @@
 from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
-from sqlalchemy.sql import func
 from api.blockchain.models import Transactions, Blockchain
-from api.utils import make_response
+from api.utils import make_response, make_empty
 from extensions import db
 from sqlalchemy import exc
 from api.blockchain.parsers import TransactionSchema
 from api.blockchain.fields import block_schema
 import hashlib
-import json
-import time
-
 from time import time
-
+import random
 
 class BlockchainTransaction(Resource):
     
@@ -22,7 +18,6 @@ class BlockchainTransaction(Resource):
         """Create a new transaction"""
         try:
             args = TransactionSchema().load(request.json)
-            print(args)
         except ValidationError as error:
             return make_response(400, message="Bad JSON format")
         
@@ -42,8 +37,6 @@ class BlockchainTransaction(Resource):
     
 class BlockchainMine(Resource):
 
-    
-
     @staticmethod
     def get():
         """Mine a new transaction """
@@ -51,11 +44,9 @@ class BlockchainMine(Resource):
         transaction = db.session.query(Transactions.bookID.label("bookID"),
                                        Transactions.sender.label("sender"), 
                                        Transactions.receiver.label("receiver")).all()
-        last_transaction = transaction[-1]
-
         
+        last_transaction = transaction[-1]
         delete_transaction(last_transaction["bookID"])
-
 
         chain = db.session.query(Blockchain.bookID.label("bookID"),
                                  Blockchain.index.label("index"),
@@ -65,7 +56,8 @@ class BlockchainMine(Resource):
                                  Blockchain.proof.label("proof")).filter(Blockchain.bookID.like(last_transaction["bookID"])).all()
         
         if chain is None or len(chain) == 0:
-            add_first_block(last_transaction["bookID"])
+            args = {'bookID': last_transaction["bookID"], 'prev_hash': 1, 'proof':  random.randint(20, 100)}
+            add_block(args)
 
         chain = db.session.query(Blockchain.bookID.label("bookID"),
                                  Blockchain.index.label("index"),
@@ -77,7 +69,7 @@ class BlockchainMine(Resource):
         proof = proof_of_work(chain[-1])
         previous_hash = hash(chain[-1])
 
-        args = {
+        block = {
             'bookID': last_transaction["bookID"],
             'index': len(chain) + 1,
             'timestamp': str(time()),
@@ -86,53 +78,35 @@ class BlockchainMine(Resource):
             'prev_hash': str(previous_hash)
         }
 
-
-        block = Blockchain(**args)
-        print(args)
-        try:
-            db.session.add(block)
-        except exc.SQLAlchemyError:
-            db.session.rollback()
-            return make_response(500, message="Database add block to blockchain error")
-
-        try:
-            db.session.commit()
-        except exc.SQLAlchemyError:
-            db.session.rollback()
-            return make_response(500, message="Database commit error while adding block to blockchain ")
-        
-
-        return make_response(200, block = block_schema.dump(block))
+        add_block(block)
+        # return make_response(200, block = block_schema.dump(block))
+        return make_empty(200)
     
 def delete_transaction(bookID):
-    transaction = db.session.query(Transactions).filter(Transactions.bookID.like(bookID)).one()
+    transaction = db.session.query(Transactions).filter(Transactions.bookID.like(bookID)).all()
     try:
-        db.session.delete(transaction)
+        db.session.delete(transaction[-1])
     except exc.SQLAlchemyError:
         db.session.rollback()
-        return make_response(500, message="Database delete error")
-
+        return make_response(500, message="Database delete block error")
     try:
         db.session.commit()
     except exc.SQLAlchemyError:
         db.session.rollback()
-        return make_response(500, message="Database commit error")
+        return make_response(500, message="Database commit block error")
     
-
-def add_first_block(bookID):
-    args = {'bookID': bookID, 'prev_hash': 1, 'proof': 100}
-    first_chain = Blockchain(**args)
+def add_block(args):
+    block = Blockchain(**args)
     try:
-        db.session.add(first_chain)
+        db.session.add(block)
     except exc.SQLAlchemyError:
         db.session.rollback()
-        return make_response(500, message="Database add first block to blockchain error")
-
+        return make_response(500, message="Database add block to blockchain error")
     try:
         db.session.commit()
     except exc.SQLAlchemyError:
         db.session.rollback()
-        return make_response(500, message="Database commit error while adding first block to blockchain ")
+        return make_response(500, message="Database commit error while adding block to blockchain ")
     
 def proof_of_work(last_block):
     """
@@ -175,8 +149,4 @@ def hash(block):
 
     :param block: Block
     """
-
-    # We must make sure that the Dictionary is Ordered, or we'll have inconsistent hashes
-    # block_string = json.dumps(block, sort_keys=True).encode()
-    print(block)
     return hashlib.sha256(repr(block).encode()).hexdigest()
