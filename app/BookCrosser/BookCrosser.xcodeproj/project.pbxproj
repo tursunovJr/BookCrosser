@@ -7,43 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C3F865229E19B6D00007624 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F865129E19B6D00007624 /* MainView.swift */; };
+		8C3F865429E19C9A00007624 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F865329E19C9A00007624 /* GenreView.swift */; };
+		8C3F865629E1A11D00007624 /* FavouritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F865529E1A11D00007624 /* FavouritesView.swift */; };
+		8C3F865829E1A13900007624 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F865729E1A13900007624 /* ProfileView.swift */; };
+		8C3F865A29E1B34100007624 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C3F865929E1B34100007624 /* GoogleService-Info.plist */; };
+		8C3F865D29E1B56800007624 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3F865C29E1B56800007624 /* FirebaseAnalytics */; };
+		8C3F865F29E1B56800007624 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3F865E29E1B56800007624 /* FirebaseAuth */; };
+		8C3F866129E1B56800007624 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3F866029E1B56800007624 /* FirebaseDatabase */; };
+		8C3F866329E1B56800007624 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3F866229E1B56800007624 /* FirebaseStorage */; };
+		8C3F866629E1B90D00007624 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866529E1B90D00007624 /* AuthViewModel.swift */; };
+		8C3F866A29E1BA2D00007624 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866929E1BA2D00007624 /* ContentView.swift */; };
+		8C3F866C29E1BA9100007624 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866B29E1BA9100007624 /* SignUpView.swift */; };
 		8CD737CB29B3742D00CB4DC7 /* BookCrosserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737CA29B3742D00CB4DC7 /* BookCrosserApp.swift */; };
-		8CD737CD29B3742D00CB4DC7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737CC29B3742D00CB4DC7 /* ContentView.swift */; };
+		8CD737CD29B3742D00CB4DC7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737CC29B3742D00CB4DC7 /* HomeView.swift */; };
 		8CD737CF29B3742E00CB4DC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD737CE29B3742E00CB4DC7 /* Assets.xcassets */; };
 		8CD737D229B3742E00CB4DC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD737D129B3742E00CB4DC7 /* Preview Assets.xcassets */; };
-		8CD737DC29B3742E00CB4DC7 /* BookCrosserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737DB29B3742E00CB4DC7 /* BookCrosserTests.swift */; };
-		8CD737E629B3742E00CB4DC7 /* BookCrosserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737E529B3742E00CB4DC7 /* BookCrosserUITests.swift */; };
-		8CD737E829B3742E00CB4DC7 /* BookCrosserUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737E729B3742E00CB4DC7 /* BookCrosserUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8CD737D829B3742E00CB4DC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8CD737BF29B3742D00CB4DC7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8CD737C629B3742D00CB4DC7;
-			remoteInfo = BookCrosser;
-		};
-		8CD737E229B3742E00CB4DC7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8CD737BF29B3742D00CB4DC7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8CD737C629B3742D00CB4DC7;
-			remoteInfo = BookCrosser;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		8C3F865129E19B6D00007624 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8C3F865329E19C9A00007624 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
+		8C3F865529E1A11D00007624 /* FavouritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesView.swift; sourceTree = "<group>"; };
+		8C3F865729E1A13900007624 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		8C3F865929E1B34100007624 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C3F866529E1B90D00007624 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		8C3F866929E1BA2D00007624 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8C3F866B29E1BA9100007624 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		8CD737C729B3742D00CB4DC7 /* BookCrosser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookCrosser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD737CA29B3742D00CB4DC7 /* BookCrosserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCrosserApp.swift; sourceTree = "<group>"; };
-		8CD737CC29B3742D00CB4DC7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8CD737CC29B3742D00CB4DC7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8CD737CE29B3742E00CB4DC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CD737D129B3742E00CB4DC7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		8CD737D729B3742E00CB4DC7 /* BookCrosserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookCrosserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CD737DB29B3742E00CB4DC7 /* BookCrosserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCrosserTests.swift; sourceTree = "<group>"; };
-		8CD737E129B3742E00CB4DC7 /* BookCrosserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BookCrosserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CD737E529B3742E00CB4DC7 /* BookCrosserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCrosserUITests.swift; sourceTree = "<group>"; };
-		8CD737E729B3742E00CB4DC7 /* BookCrosserUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCrosserUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,32 +46,50 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CD737D429B3742E00CB4DC7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CD737DE29B3742E00CB4DC7 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				8C3F866129E1B56800007624 /* FirebaseDatabase in Frameworks */,
+				8C3F866329E1B56800007624 /* FirebaseStorage in Frameworks */,
+				8C3F865D29E1B56800007624 /* FirebaseAnalytics in Frameworks */,
+				8C3F865F29E1B56800007624 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C3F866429E1B8FA00007624 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				8C3F866529E1B90D00007624 /* AuthViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8C3F866729E1B91900007624 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8C3F866829E1B93400007624 /* AuthView */,
+				8C3F865129E19B6D00007624 /* MainView.swift */,
+				8C3F866929E1BA2D00007624 /* ContentView.swift */,
+				8C3F865329E19C9A00007624 /* GenreView.swift */,
+				8C3F865529E1A11D00007624 /* FavouritesView.swift */,
+				8C3F865729E1A13900007624 /* ProfileView.swift */,
+				8CD737CC29B3742D00CB4DC7 /* HomeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8C3F866829E1B93400007624 /* AuthView */ = {
+			isa = PBXGroup;
+			children = (
+				8C3F866B29E1BA9100007624 /* SignUpView.swift */,
+			);
+			path = AuthView;
+			sourceTree = "<group>";
+		};
 		8CD737BE29B3742D00CB4DC7 = {
 			isa = PBXGroup;
 			children = (
 				8CD737C929B3742D00CB4DC7 /* BookCrosser */,
-				8CD737DA29B3742E00CB4DC7 /* BookCrosserTests */,
-				8CD737E429B3742E00CB4DC7 /* BookCrosserUITests */,
 				8CD737C829B3742D00CB4DC7 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,8 +98,6 @@
 			isa = PBXGroup;
 			children = (
 				8CD737C729B3742D00CB4DC7 /* BookCrosser.app */,
-				8CD737D729B3742E00CB4DC7 /* BookCrosserTests.xctest */,
-				8CD737E129B3742E00CB4DC7 /* BookCrosserUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -94,10 +105,12 @@
 		8CD737C929B3742D00CB4DC7 /* BookCrosser */ = {
 			isa = PBXGroup;
 			children = (
+				8C3F866729E1B91900007624 /* View */,
+				8C3F866429E1B8FA00007624 /* ViewModel */,
 				8CD737CA29B3742D00CB4DC7 /* BookCrosserApp.swift */,
-				8CD737CC29B3742D00CB4DC7 /* ContentView.swift */,
 				8CD737CE29B3742E00CB4DC7 /* Assets.xcassets */,
 				8CD737D029B3742E00CB4DC7 /* Preview Content */,
+				8C3F865929E1B34100007624 /* GoogleService-Info.plist */,
 			);
 			path = BookCrosser;
 			sourceTree = "<group>";
@@ -108,23 +121,6 @@
 				8CD737D129B3742E00CB4DC7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		8CD737DA29B3742E00CB4DC7 /* BookCrosserTests */ = {
-			isa = PBXGroup;
-			children = (
-				8CD737DB29B3742E00CB4DC7 /* BookCrosserTests.swift */,
-			);
-			path = BookCrosserTests;
-			sourceTree = "<group>";
-		};
-		8CD737E429B3742E00CB4DC7 /* BookCrosserUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8CD737E529B3742E00CB4DC7 /* BookCrosserUITests.swift */,
-				8CD737E729B3742E00CB4DC7 /* BookCrosserUITestsLaunchTests.swift */,
-			);
-			path = BookCrosserUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,45 +139,15 @@
 			dependencies = (
 			);
 			name = BookCrosser;
+			packageProductDependencies = (
+				8C3F865C29E1B56800007624 /* FirebaseAnalytics */,
+				8C3F865E29E1B56800007624 /* FirebaseAuth */,
+				8C3F866029E1B56800007624 /* FirebaseDatabase */,
+				8C3F866229E1B56800007624 /* FirebaseStorage */,
+			);
 			productName = BookCrosser;
 			productReference = 8CD737C729B3742D00CB4DC7 /* BookCrosser.app */;
 			productType = "com.apple.product-type.application";
-		};
-		8CD737D629B3742E00CB4DC7 /* BookCrosserTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8CD737EE29B3742E00CB4DC7 /* Build configuration list for PBXNativeTarget "BookCrosserTests" */;
-			buildPhases = (
-				8CD737D329B3742E00CB4DC7 /* Sources */,
-				8CD737D429B3742E00CB4DC7 /* Frameworks */,
-				8CD737D529B3742E00CB4DC7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8CD737D929B3742E00CB4DC7 /* PBXTargetDependency */,
-			);
-			name = BookCrosserTests;
-			productName = BookCrosserTests;
-			productReference = 8CD737D729B3742E00CB4DC7 /* BookCrosserTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		8CD737E029B3742E00CB4DC7 /* BookCrosserUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8CD737F129B3742E00CB4DC7 /* Build configuration list for PBXNativeTarget "BookCrosserUITests" */;
-			buildPhases = (
-				8CD737DD29B3742E00CB4DC7 /* Sources */,
-				8CD737DE29B3742E00CB4DC7 /* Frameworks */,
-				8CD737DF29B3742E00CB4DC7 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8CD737E329B3742E00CB4DC7 /* PBXTargetDependency */,
-			);
-			name = BookCrosserUITests;
-			productName = BookCrosserUITests;
-			productReference = 8CD737E129B3742E00CB4DC7 /* BookCrosserUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -196,14 +162,6 @@
 					8CD737C629B3742D00CB4DC7 = {
 						CreatedOnToolsVersion = 14.2;
 					};
-					8CD737D629B3742E00CB4DC7 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 8CD737C629B3742D00CB4DC7;
-					};
-					8CD737E029B3742E00CB4DC7 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 8CD737C629B3742D00CB4DC7;
-					};
 				};
 			};
 			buildConfigurationList = 8CD737C229B3742D00CB4DC7 /* Build configuration list for PBXProject "BookCrosser" */;
@@ -215,13 +173,14 @@
 				Base,
 			);
 			mainGroup = 8CD737BE29B3742D00CB4DC7;
+			packageReferences = (
+				8C3F865B29E1B56800007624 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 8CD737C829B3742D00CB4DC7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8CD737C629B3742D00CB4DC7 /* BookCrosser */,
-				8CD737D629B3742E00CB4DC7 /* BookCrosserTests */,
-				8CD737E029B3742E00CB4DC7 /* BookCrosserUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,20 +192,7 @@
 			files = (
 				8CD737D229B3742E00CB4DC7 /* Preview Assets.xcassets in Resources */,
 				8CD737CF29B3742E00CB4DC7 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CD737D529B3742E00CB4DC7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CD737DF29B3742E00CB4DC7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				8C3F865A29E1B34100007624 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,42 +203,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CD737CD29B3742D00CB4DC7 /* ContentView.swift in Sources */,
+				8CD737CD29B3742D00CB4DC7 /* HomeView.swift in Sources */,
 				8CD737CB29B3742D00CB4DC7 /* BookCrosserApp.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CD737D329B3742E00CB4DC7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CD737DC29B3742E00CB4DC7 /* BookCrosserTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8CD737DD29B3742E00CB4DC7 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8CD737E629B3742E00CB4DC7 /* BookCrosserUITests.swift in Sources */,
-				8CD737E829B3742E00CB4DC7 /* BookCrosserUITestsLaunchTests.swift in Sources */,
+				8C3F866A29E1BA2D00007624 /* ContentView.swift in Sources */,
+				8C3F865429E19C9A00007624 /* GenreView.swift in Sources */,
+				8C3F866629E1B90D00007624 /* AuthViewModel.swift in Sources */,
+				8C3F865629E1A11D00007624 /* FavouritesView.swift in Sources */,
+				8C3F865829E1A13900007624 /* ProfileView.swift in Sources */,
+				8C3F866C29E1BA9100007624 /* SignUpView.swift in Sources */,
+				8C3F865229E19B6D00007624 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8CD737D929B3742E00CB4DC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8CD737C629B3742D00CB4DC7 /* BookCrosser */;
-			targetProxy = 8CD737D829B3742E00CB4DC7 /* PBXContainerItemProxy */;
-		};
-		8CD737E329B3742E00CB4DC7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8CD737C629B3742D00CB4DC7 /* BookCrosser */;
-			targetProxy = 8CD737E229B3742E00CB4DC7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		8CD737E929B3742E00CB4DC7 /* Debug */ = {
@@ -465,78 +388,6 @@
 			};
 			name = Release;
 		};
-		8CD737EF29B3742E00CB4DC7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ztursunov.BookCrosser.BookCrosserTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BookCrosser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BookCrosser";
-			};
-			name = Debug;
-		};
-		8CD737F029B3742E00CB4DC7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ztursunov.BookCrosser.BookCrosserTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BookCrosser.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/BookCrosser";
-			};
-			name = Release;
-		};
-		8CD737F229B3742E00CB4DC7 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ztursunov.BookCrosser.BookCrosserUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = BookCrosser;
-			};
-			name = Debug;
-		};
-		8CD737F329B3742E00CB4DC7 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ztursunov.BookCrosser.BookCrosserUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = BookCrosser;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -558,25 +409,41 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8CD737EE29B3742E00CB4DC7 /* Build configuration list for PBXNativeTarget "BookCrosserTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8CD737EF29B3742E00CB4DC7 /* Debug */,
-				8CD737F029B3742E00CB4DC7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8CD737F129B3742E00CB4DC7 /* Build configuration list for PBXNativeTarget "BookCrosserUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8CD737F229B3742E00CB4DC7 /* Debug */,
-				8CD737F329B3742E00CB4DC7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8C3F865B29E1B56800007624 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8C3F865C29E1B56800007624 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C3F865B29E1B56800007624 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		8C3F865E29E1B56800007624 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C3F865B29E1B56800007624 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		8C3F866029E1B56800007624 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C3F865B29E1B56800007624 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		8C3F866229E1B56800007624 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C3F865B29E1B56800007624 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8CD737BF29B3742D00CB4DC7 /* Project object */;
 }
