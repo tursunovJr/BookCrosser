@@ -17,7 +17,7 @@ final class AuthViewModel: ObservableObject {
     
     func listenToAuthState() {
         Auth.auth().addStateDidChangeListener { [weak self] _, user in
-            guard let self = self else {
+            guard let self else {
                 return
             }
             self.user = user
@@ -26,7 +26,16 @@ final class AuthViewModel: ObservableObject {
     
     func signUp(emailAddress: String, password: String) {
         Auth.auth().createUser(withEmail: emailAddress, password: password) { result, error in
-            if let error = error {
+            if let error {
+                print("an error occured: \(error.localizedDescription)")
+                return
+            }
+        }
+    }
+    
+    func signIn(emailAddress: String, password: String) {
+        Auth.auth().signIn(withEmail: emailAddress, password: password) { result, error in
+            if let error {
                 print("an error occured: \(error.localizedDescription)")
                 return
             }
