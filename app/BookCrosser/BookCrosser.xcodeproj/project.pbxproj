@@ -23,6 +23,8 @@
 		8CD737CD29B3742D00CB4DC7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737CC29B3742D00CB4DC7 /* HomeView.swift */; };
 		8CD737CF29B3742E00CB4DC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD737CE29B3742E00CB4DC7 /* Assets.xcassets */; };
 		8CD737D229B3742E00CB4DC7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD737D129B3742E00CB4DC7 /* Preview Assets.xcassets */; };
+		8CDB2A6A29EBF46B00908915 /* SettingsListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB2A6929EBF46B00908915 /* SettingsListRowView.swift */; };
+		8CDB2A6D29EBF4CC00908915 /* SettingsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDB2A6C29EBF4CC00908915 /* SettingsListModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		8CD737CC29B3742D00CB4DC7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8CD737CE29B3742E00CB4DC7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CD737D129B3742E00CB4DC7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		8CDB2A6929EBF46B00908915 /* SettingsListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListRowView.swift; sourceTree = "<group>"; };
+		8CDB2A6C29EBF4CC00908915 /* SettingsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsListModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +71,7 @@
 		8C3F866729E1B91900007624 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8CDB2A6829EBF45200908915 /* Settings */,
 				8C3F866829E1B93400007624 /* AuthView */,
 				8C3F865129E19B6D00007624 /* MainView.swift */,
 				8C3F866929E1BA2D00007624 /* ContentView.swift */,
@@ -121,6 +126,31 @@
 				8CD737D129B3742E00CB4DC7 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		8CDB2A6829EBF45200908915 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8CDB2A6E29EBF53A00908915 /* View */,
+				8CDB2A6B29EBF4A900908915 /* Model */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		8CDB2A6B29EBF4A900908915 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8CDB2A6C29EBF4CC00908915 /* SettingsListModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8CDB2A6E29EBF53A00908915 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8CDB2A6929EBF46B00908915 /* SettingsListRowView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,11 +234,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CD737CD29B3742D00CB4DC7 /* HomeView.swift in Sources */,
+				8CDB2A6D29EBF4CC00908915 /* SettingsListModel.swift in Sources */,
 				8CD737CB29B3742D00CB4DC7 /* BookCrosserApp.swift in Sources */,
 				8C3F866A29E1BA2D00007624 /* ContentView.swift in Sources */,
 				8C3F865429E19C9A00007624 /* GenreView.swift in Sources */,
 				8C3F866629E1B90D00007624 /* AuthViewModel.swift in Sources */,
 				8C3F865629E1A11D00007624 /* FavouritesView.swift in Sources */,
+				8CDB2A6A29EBF46B00908915 /* SettingsListRowView.swift in Sources */,
 				8C3F865829E1A13900007624 /* ProfileView.swift in Sources */,
 				8C3F866C29E1BA9100007624 /* SignUpView.swift in Sources */,
 				8C3F865229E19B6D00007624 /* MainView.swift in Sources */,
