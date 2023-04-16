@@ -31,6 +31,7 @@ final class AuthViewModel: ObservableObject {
                 return
             }
         }
+        
     }
     
     func signIn(emailAddress: String, password: String) {

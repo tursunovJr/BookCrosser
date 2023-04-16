@@ -1,17 +1,16 @@
 from marshmallow import fields, Schema, pre_dump
 
 class UserInfoSchema(Schema):
-    id = fields.String(attribute="id")
-    username = fields.String(attribute="username")
-    email = fields.String(attribute="email")
+    name = fields.String(attribute="name")
+    surname = fields.String(attribute="surname")
+    email = fields.Email(attribute="email")
     city = fields.String(attribute="city")
 
     @pre_dump
-    def group(self, data, many):
-        print("Serik", data)
+    def group(self, data):
         return {
-            "id": data["id"],
-            "username": data["username"],
+            "name": data["name"],
+            "surname": data["surname"],
             "email": data["email"],
             "city": data["city"]
         }

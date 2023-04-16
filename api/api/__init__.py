@@ -1,7 +1,7 @@
 from flask import Blueprint, json
 from flask_restful import Api
 from werkzeug.exceptions import HTTPException
-from api.auth.controllers import UserRegister, UserAuth, UserLogout, UserInfo
+from api.auth.controllers import UserInfo, User
 from api.book.controllers import Books, BooksActions
 from api.genre.controllers import Genre, GenresActions
 from api.blockchain.controllers import BlockchainTransaction, BlockchainMine, BlockchainAction
@@ -13,10 +13,8 @@ api = Api(api_bp)
 # Add resources
 
 # Auth API Module
-api.add_resource(UserRegister, "/register")
-api.add_resource(UserAuth, "/auth")
-api.add_resource(UserLogout, "/logout")
-api.add_resource(UserInfo, "/user")
+api.add_resource(User, "/user")
+api.add_resource(UserInfo, "/user/<string:email>", endpoint="email")
 
 # Book API Module
 api.add_resource(Books, "/book")

@@ -18,7 +18,11 @@
 		8C3F866329E1B56800007624 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3F866229E1B56800007624 /* FirebaseStorage */; };
 		8C3F866629E1B90D00007624 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866529E1B90D00007624 /* AuthViewModel.swift */; };
 		8C3F866A29E1BA2D00007624 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866929E1BA2D00007624 /* ContentView.swift */; };
-		8C3F866C29E1BA9100007624 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866B29E1BA9100007624 /* SignUpView.swift */; };
+		8C3F866C29E1BA9100007624 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866B29E1BA9100007624 /* SignInView.swift */; };
+		8C640B5F29EC8944008C801D /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C640B5E29EC8944008C801D /* APIServiceError.swift */; };
+		8C640B6129EC8AC4008C801D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C640B6029EC8AC4008C801D /* APIService.swift */; };
+		8C640B6429EC8BEF008C801D /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C640B6329EC8BEF008C801D /* UserResponse.swift */; };
+		8C640B6629ECA2C9008C801D /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C640B6529ECA2C9008C801D /* SignUpView.swift */; };
 		8CD737CB29B3742D00CB4DC7 /* BookCrosserApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737CA29B3742D00CB4DC7 /* BookCrosserApp.swift */; };
 		8CD737CD29B3742D00CB4DC7 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD737CC29B3742D00CB4DC7 /* HomeView.swift */; };
 		8CD737CF29B3742E00CB4DC7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CD737CE29B3742E00CB4DC7 /* Assets.xcassets */; };
@@ -35,7 +39,11 @@
 		8C3F865929E1B34100007624 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C3F866529E1B90D00007624 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		8C3F866929E1BA2D00007624 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		8C3F866B29E1BA9100007624 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		8C3F866B29E1BA9100007624 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		8C640B5E29EC8944008C801D /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
+		8C640B6029EC8AC4008C801D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		8C640B6329EC8BEF008C801D /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
+		8C640B6529ECA2C9008C801D /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		8CD737C729B3742D00CB4DC7 /* BookCrosser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookCrosser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CD737CA29B3742D00CB4DC7 /* BookCrosserApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCrosserApp.swift; sourceTree = "<group>"; };
 		8CD737CC29B3742D00CB4DC7 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -86,9 +94,28 @@
 		8C3F866829E1B93400007624 /* AuthView */ = {
 			isa = PBXGroup;
 			children = (
-				8C3F866B29E1BA9100007624 /* SignUpView.swift */,
+				8C3F866B29E1BA9100007624 /* SignInView.swift */,
+				8C640B6529ECA2C9008C801D /* SignUpView.swift */,
 			);
 			path = AuthView;
+			sourceTree = "<group>";
+		};
+		8C640B5D29EC8923008C801D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				8C640B6229EC8BB7008C801D /* Model */,
+				8C640B5E29EC8944008C801D /* APIServiceError.swift */,
+				8C640B6029EC8AC4008C801D /* APIService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		8C640B6229EC8BB7008C801D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8C640B6329EC8BEF008C801D /* UserResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8CD737BE29B3742D00CB4DC7 = {
@@ -110,6 +137,7 @@
 		8CD737C929B3742D00CB4DC7 /* BookCrosser */ = {
 			isa = PBXGroup;
 			children = (
+				8C640B5D29EC8923008C801D /* Service */,
 				8C3F866729E1B91900007624 /* View */,
 				8C3F866429E1B8FA00007624 /* ViewModel */,
 				8CD737CA29B3742D00CB4DC7 /* BookCrosserApp.swift */,
@@ -234,6 +262,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CD737CD29B3742D00CB4DC7 /* HomeView.swift in Sources */,
+				8C640B6629ECA2C9008C801D /* SignUpView.swift in Sources */,
+				8C640B5F29EC8944008C801D /* APIServiceError.swift in Sources */,
 				8CDB2A6D29EBF4CC00908915 /* SettingsListModel.swift in Sources */,
 				8CD737CB29B3742D00CB4DC7 /* BookCrosserApp.swift in Sources */,
 				8C3F866A29E1BA2D00007624 /* ContentView.swift in Sources */,
@@ -241,8 +271,10 @@
 				8C3F866629E1B90D00007624 /* AuthViewModel.swift in Sources */,
 				8C3F865629E1A11D00007624 /* FavouritesView.swift in Sources */,
 				8CDB2A6A29EBF46B00908915 /* SettingsListRowView.swift in Sources */,
+				8C640B6129EC8AC4008C801D /* APIService.swift in Sources */,
 				8C3F865829E1A13900007624 /* ProfileView.swift in Sources */,
-				8C3F866C29E1BA9100007624 /* SignUpView.swift in Sources */,
+				8C640B6429EC8BEF008C801D /* UserResponse.swift in Sources */,
+				8C3F866C29E1BA9100007624 /* SignInView.swift in Sources */,
 				8C3F865229E19B6D00007624 /* MainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,7 +36,7 @@ struct ProfileView: View {
             SettingsListRowView(model: .init(name: "Reviews")).frame(height: 40.0)
             
             Button {
-//                authModel.signOut()
+                authModel.signOut()
             } label: {
                 Text("Log Out").bold()
             }
