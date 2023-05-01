@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject private var authModel: AuthViewModel
+    @EnvironmentObject
+    private var authModel: AuthService
     
     var body: some View {
         Group {
-            if authModel.user != nil {
+            if self.authModel.user != nil {
                 MainView()
             } else {
                 SignInView()
             }
         }.onAppear {
-            authModel.listenToAuthState()
+            self.authModel.listenToAuthState()
         }
     }
 }

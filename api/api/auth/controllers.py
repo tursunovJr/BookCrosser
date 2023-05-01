@@ -2,7 +2,7 @@ from flask import request
 from flask_restful import Resource
 from marshmallow import ValidationError
 from api.auth.parsers import UserSchema
-from api.auth.models import User
+from api.auth.models import Users
 from api.utils import make_response, make_empty
 from extensions import db
 from sqlalchemy import exc
@@ -17,7 +17,8 @@ class User(Resource):
             args = UserSchema().load(request.json)
         except ValidationError as error:
             return make_response(400, message="Bad JSON format")
-        user = User(**args)
+        print("[DEBUG]]", args)
+        user = Users(**args)
         try:
             db.session.add(user)
         except exc.SQLAlchemyError:
@@ -36,16 +37,17 @@ class UserInfo(Resource):
     def get(email):
         """Получить информацию о пользователе"""
 
-        user_info = db.session.query(User.name.label("name"),
-                                     User.surname.label("surname"),
-                                     User.email.label("email"),
-                                     User.city.label("city"))\
-            .filter(User.email.like(str(email)))\
+        user_info = db.session.query(Users.name.label("name"),
+                                     Users.surname.label("surname"),
+                                     Users.email.label("email"),
+                                     Users.city.label("city"))\
+            .filter(Users.email.like(str(email)))\
             .one_or_none()
 
         if user_info is None or id is None:
             abort(404, message="Book info with email={} not found"
                   .format(email))
 
+        print("[DEBUG]", user_info)
         return make_response(200, **user_info_schema.dump(user_info))        
     

@@ -23,7 +23,7 @@ struct BookCrosserApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(AuthViewModel())
+            ContentView().environmentObject(AuthService())
         }
     }
 }

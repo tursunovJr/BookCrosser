@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct SignUpView: View {
-    @EnvironmentObject private var authModel: AuthViewModel
-    @EnvironmentObject private var apiService: APIService
+    @EnvironmentObject
+    private var authService: AuthService
     
-    @State private var name: String = ""
-    @State private var surname: String = ""
-    @State private var city: String = ""
-    @State private var emailAddress: String = ""
-    @State private var password: String = ""
+    @State
+    private var name: String = ""
+    @State
+    private var surname: String = ""
+    @State
+    private var city: String = ""
+    @State
+    private var emailAddress: String = ""
+    @State
+    private var password: String = ""
    
     var body: some View {
         VStack {
@@ -49,11 +54,11 @@ struct SignUpView: View {
             .frame(height: 350.0)
             .scrollContentBackground(.hidden)
             Button {
-                self.authModel.signUp(emailAddress: self.emailAddress, password: self.password)
-                self.apiService.addUserInfo(model: .init(name: self.name,
-                                                                     surname: self.surname,
-                                                                     email: self.emailAddress,
-                                                                     city: self.city))
+                self.authService.signUp(emailAddress: self.emailAddress, password: self.password)
+                self.authService.addUserInfo(model: .init(name: self.name,
+                                                          surname: self.surname,
+                                                          email: self.emailAddress,
+                                                          city: self.city))
                 
             } label: {
                 Text("Sign Up").bold().foregroundColor(.white)

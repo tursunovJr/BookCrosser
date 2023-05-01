@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct SignInView: View {
-    @EnvironmentObject private var authModel: AuthViewModel
-    @State private var emailAddress: String = ""
-    @State private var password: String = ""
+    @EnvironmentObject
+    private var authService: AuthService
+    @State
+    private var emailAddress: String = ""
+    @State
+    private var password: String = ""
     
     var body: some View {
         NavigationView {
@@ -25,12 +28,12 @@ struct SignInView: View {
                 
                 Form {
                     Section {
-                        TextField("Email", text: $emailAddress)
+                        TextField("Email", text: self.$emailAddress)
                             .textContentType(.emailAddress)
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled(true)
                             .keyboardType(.emailAddress)
-                        SecureField("Password", text: $password)
+                        SecureField("Password", text: self.$password)
                             .textContentType(.password)
                             .keyboardType(.default)
                     }
@@ -40,7 +43,7 @@ struct SignInView: View {
                 
                 VStack {
                     Button {
-                        authModel.signIn(emailAddress: emailAddress, password: password)
+                        self.authService.signIn(emailAddress: self.emailAddress, password: self.password)
                     } label: {
                         Text("Sign In").bold().foregroundColor(.white)
                     }
@@ -53,7 +56,7 @@ struct SignInView: View {
                         .fill(.green)
                     )
                     Spacer().frame(height: 50.0)
-                    NavigationLink(destination:  SignUpView().environmentObject(APIService())) {
+                    NavigationLink(destination: SignUpView()) {
                         Text("No account? Sign Up").bold()
                     }
                 }

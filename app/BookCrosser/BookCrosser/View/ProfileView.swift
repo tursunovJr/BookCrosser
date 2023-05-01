@@ -5,10 +5,20 @@
 //  Created by ztursunov on 08.04.2023.
 //
 
+import Combine
 import SwiftUI
 
 struct ProfileView: View {
-    @EnvironmentObject private var authModel: AuthViewModel
+    @EnvironmentObject
+    var authService: AuthService
+    @State
+    var userInfo: UserInfoModel?
+    @State
+    var isLoading = false
+    @State
+    var error: APIServiceError?
+    @State
+    var cancellables = Set<AnyCancellable>()
     
     var body: some View {
         
@@ -27,8 +37,13 @@ struct ProfileView: View {
                 .cornerRadius(50.0)
                 .padding()
             
-//            Text("Hello, \(authModel.user?.email ?? "Anonymous guest")")
-            Text("Name Surname").font(.title)
+            if self.isLoading {
+                ProgressView()
+            } else if let userInfo = userInfo {
+                Text("\(userInfo.name) \(userInfo.surname)").font(.title)
+            } else if let error = error {
+                Text("Error: \(error.localizedDescription)")
+            }
             
             SettingsListRowView(model: .init(name: "Personal information")).frame(height: 40.0)
             SettingsListRowView(model: .init(name: "Books")).frame(height: 40.0)
@@ -36,12 +51,28 @@ struct ProfileView: View {
             SettingsListRowView(model: .init(name: "Reviews")).frame(height: 40.0)
             
             Button {
-                authModel.signOut()
+                self.authService.signOut()
             } label: {
                 Text("Log Out").bold()
             }
             Spacer()
-
+            
+        }
+        .onAppear {
+            self.isLoading = true
+            self.authService.getUser()
+                .sink { completion in
+                    self.isLoading = false
+                    switch completion {
+                    case let .failure(error):
+                        self.error = error
+                    case .finished:
+                        break
+                    }
+                } receiveValue: { userInfo in
+                    self.userInfo = userInfo
+                }
+                .store(in: &self.cancellables)
         }
         
     }
