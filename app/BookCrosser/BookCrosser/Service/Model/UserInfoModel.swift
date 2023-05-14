@@ -12,11 +12,4 @@ struct UserInfoModel: Decodable {
     let surname: String
     let email: String
     let city: String
-    
-    enum CodingKeys: String, CodingKey {
-        case name
-        case surname
-        case email
-        case city
-    }
 }

@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct MainView: View {
+    @StateObject
+    var bookService = BookService()
+    
     var body: some View {
-        TabView{
+        TabView {
             HomeView()
+                .environmentObject(bookService)
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-//                .toolbar(.visible, for: .tabBar)
-//                .toolbarBackground(Color.green, for: .tabBar)
             GenreView()
                 .tabItem {
                     Label("Genres", systemImage: "square.on.square")

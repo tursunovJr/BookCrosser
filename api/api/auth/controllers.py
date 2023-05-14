@@ -17,7 +17,6 @@ class User(Resource):
             args = UserSchema().load(request.json)
         except ValidationError as error:
             return make_response(400, message="Bad JSON format")
-        print("[DEBUG]]", args)
         user = Users(**args)
         try:
             db.session.add(user)
@@ -48,6 +47,5 @@ class UserInfo(Resource):
             abort(404, message="Book info with email={} not found"
                   .format(email))
 
-        print("[DEBUG]", user_info)
         return make_response(200, **user_info_schema.dump(user_info))        
     

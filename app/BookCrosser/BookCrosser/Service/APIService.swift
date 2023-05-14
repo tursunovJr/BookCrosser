@@ -9,6 +9,13 @@ import Combine
 import Foundation
 
 
-final class APIService: ObservableObject {
-    
+class APIService: ObservableObject {
+    func baseUrl(_ suffixURL: String) -> URL? {
+        
+        guard let baseURL = URLComponents(string: "http://0.0.0.0:8080/api/v1/\(suffixURL)") else {
+            return nil
+        }
+        
+        return baseURL.url
+    }
 }

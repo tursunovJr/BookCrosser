@@ -9,7 +9,17 @@ import Combine
 import FirebaseAuth
 import SwiftUI
 
-final class AuthService: ObservableObject {
+protocol AuthServiceProtocol {
+    func listenToAuthState()
+    func signUp(emailAddress: String, password: String)
+    func signIn(emailAddress: String, password: String)
+    func signOut()
+    func addUserInfo(model: UserInfoModel)
+    func getUser() -> AnyPublisher<UserInfoModel, APIServiceError>
+}
+
+
+final class AuthService: APIService, AuthServiceProtocol {
     
     /// Info about user from `Firebase Auth`.
     var user: User? {
@@ -102,16 +112,5 @@ final class AuthService: ObservableObject {
             .decode(type: UserInfoModel.self, decoder: JSONDecoder())
             .mapError { APIServiceError.parseError($0) }
             .eraseToAnyPublisher()
-    }
-}
-
-extension AuthService {
-    private func baseUrl(_ suffixURL: String) -> URL? {
-        
-        guard let baseURL = URLComponents(string: "http://0.0.0.0:8080/api/v1/\(suffixURL)") else {
-            return nil
-        }
-        
-        return baseURL.url
     }
 }
