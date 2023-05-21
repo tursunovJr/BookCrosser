@@ -30,6 +30,7 @@ struct MainView: View {
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle")
                 }
+                .environmentObject(AuthService())
                 
         }
     }

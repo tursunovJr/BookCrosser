@@ -17,7 +17,6 @@
 		8C3F866129E1B56800007624 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3F866029E1B56800007624 /* FirebaseDatabase */; };
 		8C3F866329E1B56800007624 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C3F866229E1B56800007624 /* FirebaseStorage */; };
 		8C3F866629E1B90D00007624 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866529E1B90D00007624 /* AuthService.swift */; };
-		8C3F866A29E1BA2D00007624 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866929E1BA2D00007624 /* ContentView.swift */; };
 		8C3F866C29E1BA9100007624 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3F866B29E1BA9100007624 /* SignInView.swift */; };
 		8C640B5F29EC8944008C801D /* APIServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C640B5E29EC8944008C801D /* APIServiceError.swift */; };
 		8C640B6129EC8AC4008C801D /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C640B6029EC8AC4008C801D /* APIService.swift */; };
@@ -41,7 +40,6 @@
 		8C3F865729E1A13900007624 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		8C3F865929E1B34100007624 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C3F866529E1B90D00007624 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		8C3F866929E1BA2D00007624 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8C3F866B29E1BA9100007624 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		8C640B5E29EC8944008C801D /* APIServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceError.swift; sourceTree = "<group>"; };
 		8C640B6029EC8AC4008C801D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
@@ -78,24 +76,23 @@
 			isa = PBXGroup;
 			children = (
 				8CD50F2C2A0A9A0D00590493 /* HomeView */,
-				8CDB2A6829EBF45200908915 /* Settings */,
-				8C3F866829E1B93400007624 /* AuthView */,
+				8CDB2A6829EBF45200908915 /* SettingsView */,
+				8C3F866829E1B93400007624 /* ProfileView */,
 				8C3F865129E19B6D00007624 /* MainView.swift */,
-				8C3F866929E1BA2D00007624 /* ContentView.swift */,
 				8C3F865329E19C9A00007624 /* GenreView.swift */,
 				8C3F865529E1A11D00007624 /* FavouritesView.swift */,
-				8C3F865729E1A13900007624 /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		8C3F866829E1B93400007624 /* AuthView */ = {
+		8C3F866829E1B93400007624 /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
 				8C3F866B29E1BA9100007624 /* SignInView.swift */,
+				8C3F865729E1A13900007624 /* ProfileView.swift */,
 				8C640B6529ECA2C9008C801D /* SignUpView.swift */,
 			);
-			path = AuthView;
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 		8C640B5D29EC8923008C801D /* Service */ = {
@@ -165,13 +162,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		8CDB2A6829EBF45200908915 /* Settings */ = {
+		8CDB2A6829EBF45200908915 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
 				8CDB2A6E29EBF53A00908915 /* View */,
 				8CDB2A6B29EBF4A900908915 /* Model */,
 			);
-			path = Settings;
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		8CDB2A6B29EBF4A900908915 /* Model */ = {
@@ -276,7 +273,6 @@
 				8CDB2A6D29EBF4CC00908915 /* SettingsListModel.swift in Sources */,
 				8CD737CB29B3742D00CB4DC7 /* BookCrosserApp.swift in Sources */,
 				8CE380622A1160D2003A2DC8 /* BookInfoModel.swift in Sources */,
-				8C3F866A29E1BA2D00007624 /* ContentView.swift in Sources */,
 				8C3F865429E19C9A00007624 /* GenreView.swift in Sources */,
 				8C3F866629E1B90D00007624 /* AuthService.swift in Sources */,
 				8C3F865629E1A11D00007624 /* FavouritesView.swift in Sources */,

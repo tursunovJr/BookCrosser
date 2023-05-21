@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  HomeView.swift
 //  BookCrosser
 //
 //  Created by ztursunov on 04.03.2023.
@@ -25,7 +25,7 @@ struct HomeView: View {
     var body: some View {
         VStack {
             HStack {
-                TextField("Search", text: $searchText, onCommit: { } )
+                TextField("Поисе книг, авторов", text: $searchText, onCommit: { } )
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .foregroundColor(.black)
                 Button(action: { }) {

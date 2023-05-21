@@ -21,7 +21,18 @@ struct ProfileView: View {
     var cancellables = Set<AnyCancellable>()
     
     var body: some View {
-        
+        Group {
+            if self.authService.user != nil {
+                self.profileView
+            } else {
+                SignInView()
+            }
+        }.onAppear {
+            self.authService.listenToAuthState()
+        }
+    }
+    
+    var profileView: some View {
         VStack {
             HStack {
                 Spacer()
@@ -74,7 +85,6 @@ struct ProfileView: View {
                 }
                 .store(in: &self.cancellables)
         }
-        
     }
 }
 
