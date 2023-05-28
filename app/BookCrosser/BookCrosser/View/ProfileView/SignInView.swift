@@ -33,9 +33,11 @@ struct SignInView: View {
                             .textInputAutocapitalization(.never)
                             .autocorrectionDisabled(true)
                             .keyboardType(.emailAddress)
+                            .foregroundColor(.black)
                         SecureField("Password", text: self.$password)
                             .textContentType(.password)
                             .keyboardType(.default)
+                            .foregroundColor(.black)
                     }
                 }
                 .frame(height: 150.0)
@@ -57,7 +59,7 @@ struct SignInView: View {
                     )
                     Spacer().frame(height: 50.0)
                     NavigationLink(destination: SignUpView()) {
-                        Text("No account? Sign Up").bold()
+                        Text("No account? Sign Up").bold().foregroundColor(.blue)
                     }
                 }
                 Spacer()

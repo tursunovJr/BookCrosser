@@ -14,30 +14,14 @@ struct HomeView: View {
     @State
     var bookInfoModels: [BookInfoModel] = []
     @State
-    var isLoading = false
-    @State
     var error: APIServiceError?
     @State
     var cancellables = Set<AnyCancellable>()
-    @State
-    var searchText = ""
     
     var body: some View {
         NavigationView {
             VStack {
-                /// Строка поиска.
-                HStack {
-                    TextField("Поиск книг, авторов", text: self.$searchText, onCommit: { })
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .foregroundColor(.black)
-                    Button(action: { }) {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.white)
-                    }
-                }
-                .padding(.vertical, 8)
-                .padding(.horizontal)
-                .background(.blue)
+                NavBar()
                 
                 /// Промо-блок.
                 List {
@@ -107,19 +91,15 @@ struct HomeView: View {
             }
             
             .onAppear {
-                self.isLoading = true
                 self.bookService.getAllBooks()
                     .sink { completion in
-                        self.isLoading = false
                         switch completion {
                         case let .failure(error):
-                            print("[Serik oshibka]")
                             self.error = error
                         case .finished:
                             break
                         }
                     } receiveValue: { bookInfoModels in
-                        print("[SERIK] \(bookInfoModels)")
                         self.bookInfoModels = bookInfoModels
                     }
                     .store(in: &self.cancellables)

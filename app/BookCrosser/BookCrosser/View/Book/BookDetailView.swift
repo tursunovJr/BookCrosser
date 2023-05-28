@@ -8,12 +8,35 @@
 import SwiftUI
 
 struct BookDetailView: View {
+    @EnvironmentObject
+    var authService: AuthService
+    
+    @EnvironmentObject
+    var bookService: BookService
+    
     @State
     private var selectedButton: Int = 0
+    
+    @State
+    private var isFavorite = false
+    
     @Environment(\.presentationMode)
     var presentationMode
+    
     @State
     var model: BookInfoModel
+    
+    struct Review: Identifiable {
+        let id = UUID()
+        let comment: String
+        let author: String
+    }
+        
+    let reviews: [Review] = [
+        Review(comment: "Great book!", author: "John Doe"),
+        Review(comment: "Highly recommended!", author: "Jane Smith"),
+        Review(comment: "Loved it!", author: "Alex Johnson")
+    ]
     
     var body: some View {
         NavigationView {
@@ -32,21 +55,24 @@ struct BookDetailView: View {
                         self.geoAndAvailableButton
                         self.stars
                         self.buttons
-                        HStack{
-                        }.frame(height: 10.0)
+                        HStack { }.frame(height: 10.0)
                     }
                     Spacer()
                 }
                 .background(Color.blue)
                 
-                VStack {
-                    Text("Жанр: \(self.model.genre)")
-                        .font(.caption)
-                        .border(.gray)
-                    Text(self.model.description)
-                        .font(.caption)
+                if self.selectedButton == 0 {
+                    self.bookDescription
+                } else if self.selectedButton == 1 {
+                    self.bookReviews
+                } else if self.selectedButton == 2 {
+                    self.bookHistory
                 }
+                
                 Spacer()
+            }
+            .onAppear {
+                self.authService.listenToAuthState()
             }
         }
         .navigationBarItems(leading: self.backButton, trailing: self.actionsButtons)
@@ -64,13 +90,21 @@ struct BookDetailView: View {
     
     private var actionsButtons: some View {
         HStack {
-            Button(action: {
-                // Handle favorite button action
-            }) {
-                Image(systemName: "heart.fill")
-                    .foregroundColor(.white)
+            if self.authService.user != nil {
+                Button(action: {
+                    if self.isFavorite {
+                        self.bookService.delFavBook(email: self.authService.user?.email ?? "",
+                                                    book_uuid: self.model.uuid)
+                    } else {
+                        self.bookService.addFavBook(email: self.authService.user?.email ?? "",
+                                                    book_uuid: self.model.uuid)
+                    }
+                    self.isFavorite.toggle()
+                }) {
+                    Image(systemName: self.isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(self.isFavorite ? .red : .white)
+                }
             }
-                
             Button(action: {
                 self.shareBook()
             }) {
@@ -195,6 +229,36 @@ struct BookDetailView: View {
                     .cornerRadius(5)
             }
         }
+    }
+    
+    var bookDescription: some View {
+        ScrollView {
+            Text("Жанр: \(self.model.genre)")
+                .font(.title3)
+                .bold()
+            Text("""
+                Классический роман Брэдбери с автобиографической основой, вошедший в золотой фонд мировой литературы. Трогательная история о детстве и взрослении, мечтах и безграничных возможностях, юношеском максимализме, счастье, разрушительности войны, страхе потерять близких, дружбе, единении.
+                """)
+            .font(.title3)
+        }
+    }
+    
+    var bookReviews: some View {
+        List(self.reviews) { review in
+            VStack(alignment: .leading) {
+                Text(review.comment)
+                    .font(.headline)
+                Text("By \(review.author)")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+        }
+    }
+    
+    var bookHistory: some View {
+        Text("Book History")
+            .bold()
+            .font(.title3)
     }
     
 }

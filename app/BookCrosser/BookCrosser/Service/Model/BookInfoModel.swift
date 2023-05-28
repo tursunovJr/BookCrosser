@@ -19,6 +19,10 @@ struct BookInfoModel: Decodable, Hashable {
     let rating: Float
 }
 
+struct FavBookInfoModel: Decodable, Hashable {
+    let book_uuid: String
+}
+
 extension BookInfoModel {
 
     static func mock() -> BookInfoModel {
