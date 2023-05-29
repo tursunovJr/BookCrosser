@@ -124,7 +124,7 @@ struct BookDetailView: View {
     
     var bookInfo: some View {
         VStack {
-            Image("book")
+            Image(self.model.image)
                 .resizable()
                 .frame(width: 127.0, height: 167.0)
             Text(self.model.name)
@@ -236,9 +236,7 @@ struct BookDetailView: View {
             Text("Жанр: \(self.model.genre)")
                 .font(.title3)
                 .bold()
-            Text("""
-                Классический роман Брэдбери с автобиографической основой, вошедший в золотой фонд мировой литературы. Трогательная история о детстве и взрослении, мечтах и безграничных возможностях, юношеском максимализме, счастье, разрушительности войны, страхе потерять близких, дружбе, единении.
-                """)
+            Text(self.model.description)
             .font(.title3)
         }
     }

@@ -12,7 +12,11 @@ struct HomeView: View {
     @EnvironmentObject
     var bookService: BookService
     @State
-    var bookInfoModels: [BookInfoModel] = []
+    var recommendationBooks: [BookInfoModel] = []
+    @State
+    var newBooks: [BookInfoModel] = []
+    @State
+    var popularBooks: [BookInfoModel] = []
     @State
     var error: APIServiceError?
     @State
@@ -46,7 +50,7 @@ struct HomeView: View {
                     .frame(height: 20.0)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 5.0) {
-                            ForEach(self.bookInfoModels, id: \.uuid) { model in
+                            ForEach(self.recommendationBooks, id: \.uuid) { model in
                                 BookListRowView(model: model)
                             }
                         }
@@ -63,7 +67,7 @@ struct HomeView: View {
                     .frame(height: 20.0)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 5.0) {
-                            ForEach(self.bookInfoModels, id: \.uuid) { model in
+                            ForEach(self.newBooks, id: \.uuid) { model in
                                 BookListRowView(model: model)
                             }
                         }
@@ -80,7 +84,7 @@ struct HomeView: View {
                     .frame(height: 20.0)
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 5.0) {
-                            ForEach(self.bookInfoModels, id: \.uuid) { model in
+                            ForEach(self.popularBooks, id: \.uuid) { model in
                                 BookListRowView(model: model)
                             }
                         }
@@ -100,7 +104,31 @@ struct HomeView: View {
                             break
                         }
                     } receiveValue: { bookInfoModels in
-                        self.bookInfoModels = bookInfoModels
+                        self.recommendationBooks = bookInfoModels
+                    }
+                    .store(in: &self.cancellables)
+                self.bookService.getAllBooks()
+                    .sink { completion in
+                        switch completion {
+                        case let .failure(error):
+                            self.error = error
+                        case .finished:
+                            break
+                        }
+                    } receiveValue: { bookInfoModels in
+                        self.newBooks = bookInfoModels
+                    }
+                    .store(in: &self.cancellables)
+                self.bookService.getAllBooks()
+                    .sink { completion in
+                        switch completion {
+                        case let .failure(error):
+                            self.error = error
+                        case .finished:
+                            break
+                        }
+                    } receiveValue: { bookInfoModels in
+                        self.popularBooks = bookInfoModels
                     }
                     .store(in: &self.cancellables)
             }
@@ -111,6 +139,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         let bookMock = BookInfoModel.mock()
-        HomeView(bookInfoModels: [bookMock])
+        HomeView()
     }
 }

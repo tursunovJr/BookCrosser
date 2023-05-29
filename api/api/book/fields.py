@@ -19,11 +19,11 @@ class BookInfoSchema(Schema):
             "holderID": data.holderID,
             "name": data.name,
             "author": data.author,
-            "genre": data.genre,
+            "genre": random.sample(["Техническая", "Художественная", "Научная"], 1)[0],
             "city": data.city,
             "description": data.description,
-            "image": "book",
-            "rating": round(random.uniform(1.0, 5.0), 2) 
+            "image": data.image,
+            "rating": round(random.uniform(3.0, 5.0), 2) 
         }
 
 book_info_schema = BookInfoSchema()

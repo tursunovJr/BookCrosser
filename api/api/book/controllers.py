@@ -8,6 +8,7 @@ from extensions import db
 from sqlalchemy import exc
 from api.book.parsers import BookInfoSchema
 from api.book.fields import book_info_schema, books_schema
+import random
 
 
 class Books(Resource):
@@ -42,9 +43,10 @@ class Books(Resource):
                                   BookInfo.author.label("author"), 
                                   BookInfo.genre.label("genre"),
                                   BookInfo.city.label("city"), 
+                                  BookInfo.image.label("image"), 
                                   BookInfo.description.label("description"))\
         .all()
-        return make_response(200, books = books_schema.dump(books))
+        return make_response(200, books = books_schema.dump(random.sample(books, 6)))
 
 
 class BooksActions(Resource):
@@ -127,7 +129,8 @@ class BookGenres(Resource):
                                 BookInfo.name.label("name"),
                                 BookInfo.author.label("author"), 
                                 BookInfo.genre.label("genre"),
-                                BookInfo.city.label("city"), 
+                                BookInfo.city.label("city"),
+                                BookInfo.image.label("image"), 
                                 BookInfo.description.label("description"))\
                 .filter(BookInfo.genre.like(str(genre_uuid))).all()
 
