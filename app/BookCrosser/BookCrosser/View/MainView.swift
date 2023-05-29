@@ -25,6 +25,7 @@ struct MainView: View {
                 }
             GenreView()
                 .environmentObject(self.genreService)
+                .environmentObject(self.bookService)
                 .tabItem {
                     Label("Genres", systemImage: "square.on.square")
                 }

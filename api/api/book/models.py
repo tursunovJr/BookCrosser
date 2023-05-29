@@ -12,3 +12,4 @@ class BookInfo(db.Model):
     genre = db.Column(db.String(36), nullable=False)
     city = db.Column(db.String(36), nullable=False)
     description = db.Column(db.String(200), nullable=False)
+    # isFavourite = db.Column(db.Bool, nullable=False)

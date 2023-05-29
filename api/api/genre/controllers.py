@@ -2,6 +2,7 @@ from flask import request
 from flask_restful import Resource, abort
 from marshmallow import ValidationError
 from api.genre.models import Genres
+from api.book.models import BookInfo
 from api.utils import make_response, make_empty
 from extensions import db
 from sqlalchemy import exc
@@ -40,8 +41,7 @@ class Genre(Resource):
                                    Genres.name.label("name"))\
         .all()
          return make_response(200, genres = genres_schema.dump(genres))
-
-
+    
 class GenresActions(Resource):
     @staticmethod
     def get(genre_uuid):

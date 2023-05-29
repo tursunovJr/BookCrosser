@@ -2,6 +2,7 @@ from flask import request
 from flask_restful import Resource, abort
 from marshmallow import ValidationError
 from api.book.models import BookInfo
+from api.auth.models import UsersFavouriteBooks
 from api.utils import make_response, make_empty
 from extensions import db
 from sqlalchemy import exc
@@ -34,9 +35,8 @@ class Books(Resource):
     
     @staticmethod
     def get():
-         """Получить информацию о всех книгах"""
-
-         books = db.session.query(BookInfo.uuid.label("uuid"), 
+        """Получить информацию о всех книгах"""
+        books = db.session.query(BookInfo.uuid.label("uuid"), 
                                   BookInfo.holderID.label("holderID"),
                                   BookInfo.name.label("name"),
                                   BookInfo.author.label("author"), 
@@ -44,7 +44,7 @@ class Books(Resource):
                                   BookInfo.city.label("city"), 
                                   BookInfo.description.label("description"))\
         .all()
-         return make_response(200, books = books_schema.dump(books))
+        return make_response(200, books = books_schema.dump(books))
 
 
 class BooksActions(Resource):
@@ -116,3 +116,23 @@ class BooksActions(Resource):
             return make_response(500, message="Database commit error")
 
         return make_empty(200)
+
+class BookGenres(Resource):
+    @staticmethod
+    def get(genre_uuid):
+        """Get all books with specific genre"""
+
+        books = db.session.query(BookInfo.uuid.label("uuid"), 
+                                BookInfo.holderID.label("holderID"),
+                                BookInfo.name.label("name"),
+                                BookInfo.author.label("author"), 
+                                BookInfo.genre.label("genre"),
+                                BookInfo.city.label("city"), 
+                                BookInfo.description.label("description"))\
+                .filter(BookInfo.genre.like(str(genre_uuid))).all()
+
+        if books is None or genre_uuid is None:
+            abort(404, message="Book with Genre uuid={} not found"
+                  .format(genre_uuid))
+
+        return make_response(200, books = books_schema.dump(books))
