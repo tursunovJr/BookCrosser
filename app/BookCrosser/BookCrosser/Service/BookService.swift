@@ -15,6 +15,7 @@ protocol BookServiceProtocol {
     func getAllFavBooks(email: String) -> AnyPublisher<[FavBookInfoModel], APIServiceError>
     func getBook(uuid: String) -> AnyPublisher<BookInfoModel, APIServiceError>
     func gerBooks(genreUUID: String) -> AnyPublisher<[BookInfoModel], APIServiceError>
+    func updateBook(state: Int, bookUUID: String)
 }
 
 final class BookService: APIService, BookServiceProtocol {
@@ -175,5 +176,21 @@ final class BookService: APIService, BookServiceProtocol {
                     .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
+    }
+    
+    func updateBook(state: Int, bookUUID: String) {
+        guard let url = self.baseUrl("book/\(bookUUID)") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let params = ["state": state]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        } catch { }
+        
+        URLSession.shared.dataTask(with: request) { _, _, _ in }.resume()
     }
 }

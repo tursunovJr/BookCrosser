@@ -13,4 +13,5 @@ class BookInfo(db.Model):
     city = db.Column(db.String(36), nullable=False)
     description = db.Column(db.String(200), nullable=False)
     image = db.Column(db.String(30), nullable=False)
+    state = db.Column(db.Integer, nullable=False)
     # isFavourite = db.Column(db.Bool, nullable=False)

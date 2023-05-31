@@ -12,7 +12,8 @@ struct BookListRowView: View {
     var model: BookInfoModel
     
     var body: some View {
-        NavigationLink(destination: BookDetailView(model: model)) {
+        NavigationLink(destination: BookDetailView(model: model,
+                                                   state: model.state)) {
             VStack {
                 Image(self.model.image)
                     .resizable()

@@ -44,9 +44,10 @@ class Books(Resource):
                                   BookInfo.genre.label("genre"),
                                   BookInfo.city.label("city"), 
                                   BookInfo.image.label("image"), 
-                                  BookInfo.description.label("description"))\
+                                  BookInfo.description.label("description"),
+                                  BookInfo.state.label("state"))\
         .all()
-        return make_response(200, books = books_schema.dump(random.sample(books, 6)))
+        return make_response(200, books = books_schema.dump(books))
 
 
 class BooksActions(Resource):
@@ -55,12 +56,14 @@ class BooksActions(Resource):
         """Получить информацию о книге"""
 
         book_info = db.session.query(BookInfo.uuid.label("uuid"), 
-                                     BookInfo.holderID.label("holderID"),
-                                     BookInfo.name.label("name"),
-                                     BookInfo.author.label("author"), 
-                                     BookInfo.genre.label("genre"),
-                                     BookInfo.city.label("city"), 
-                                     BookInfo.description.label("description"))\
+                                  BookInfo.holderID.label("holderID"),
+                                  BookInfo.name.label("name"),
+                                  BookInfo.author.label("author"), 
+                                  BookInfo.genre.label("genre"),
+                                  BookInfo.city.label("city"), 
+                                  BookInfo.image.label("image"), 
+                                  BookInfo.description.label("description"),
+                                  BookInfo.state.label("state"))\
             .filter(BookInfo.uuid.like(str(book_uuid)))\
             .one_or_none()
 

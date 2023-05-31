@@ -17,6 +17,7 @@ struct BookInfoModel: Decodable, Hashable {
     let uuid: String
     let image: String
     let rating: Float
+    let state: Int
 }
 
 struct FavBookInfoModel: Decodable, Hashable {
@@ -35,7 +36,8 @@ extension BookInfoModel {
               name: "С++ для чайников",
               uuid: String(UUID().hashValue),
               image: "book",
-              rating: 4.7)
+              rating: 4.7,
+              state: 0)
     }
 }
 

@@ -11,6 +11,7 @@ class BookInfoSchema(Schema):
     description = fields.String(attribute="description")
     image = fields.String(attribute="image")
     rating = fields.Float(attribute="rating")
+    state = fields.Integer(attribute="state")
 
     @pre_dump
     def group(self, data, many):
@@ -23,7 +24,8 @@ class BookInfoSchema(Schema):
             "city": data.city,
             "description": data.description,
             "image": data.image,
-            "rating": round(random.uniform(3.0, 5.0), 2) 
+            "rating": round(random.uniform(3.0, 5.0), 2),
+            "state": data.state
         }
 
 book_info_schema = BookInfoSchema()

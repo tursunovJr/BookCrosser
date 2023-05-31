@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct BookDetailView: View {
     @EnvironmentObject
@@ -25,6 +26,15 @@ struct BookDetailView: View {
     
     @State
     var model: BookInfoModel
+    
+    @State
+    var state: Int
+    
+    @State
+    var error: APIServiceError?
+    
+    @State
+    var cancellables = Set<AnyCancellable>()
     
     struct Review: Identifiable {
         let id = UUID()
@@ -72,6 +82,19 @@ struct BookDetailView: View {
                 Spacer()
             }
             .onAppear {
+                self.bookService.getBook(uuid: self.model.uuid)
+                    .sink { completion in
+                        switch completion {
+                        case let .failure(error):
+                            self.error = error
+                        case .finished:
+                            break
+                        }
+                    } receiveValue: { bookInfoModel in
+                        self.model = bookInfoModel
+                        self.state = self.model.state
+                    }
+                    .store(in: &self.cancellables)
                 self.authService.listenToAuthState()
             }
         }
@@ -164,14 +187,19 @@ struct BookDetailView: View {
                 
             HStack {
                 Spacer(minLength: 15.0)
-                Button("Запросить") {
-                    print("Запросить")
+                Button(self.state == 0 ? "Запросить" : "Не доступно") {
+                    if self.state == 0 {
+                        self.state = 1
+                    }
+                    self.bookService.updateBook(state: self.state,
+                                                bookUUID: self.model.uuid)
                 }
-                .foregroundColor(.white)
+                .foregroundColor(self.state == 0 ? Color.white : Color.black)
                 .frame(height: 45.0)
+                .disabled(self.state != 0)
                 Spacer(minLength: 15.0)
             }
-            .background(Color.orange)
+            .background(self.state == 0 ? Color.orange : Color.gray)
             .frame(height: 45.0)
             .cornerRadius(5.0)
         }
@@ -237,7 +265,7 @@ struct BookDetailView: View {
                 .font(.title3)
                 .bold()
             Text(self.model.description)
-            .font(.title3)
+                .font(.title3)
         }
     }
     
@@ -264,6 +292,6 @@ struct BookDetailView: View {
 struct BookDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let bookMock = BookInfoModel.mock()
-        BookDetailView(model: bookMock)
+        BookDetailView(model: bookMock, state: 0)
     }
 }
