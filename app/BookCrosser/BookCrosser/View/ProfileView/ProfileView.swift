@@ -20,6 +20,10 @@ struct ProfileView: View {
     @State
     var cancellables = Set<AnyCancellable>()
     
+    private let views = [RequestedBooksRowView(id: UUID(), name: "Мои книги"),
+                         RequestedBooksRowView(id: UUID(), name: "Мои запросы"),
+                         RequestedBooksRowView(id: UUID(), name: "Настройки")]
+    
     var body: some View {
         Group {
             if self.authService.user != nil {
@@ -33,58 +37,67 @@ struct ProfileView: View {
     }
     
     var profileView: some View {
-        VStack {
-            HStack {
-                Spacer()
-                Text("Profile").bold().font(.system(size: 25.0)).foregroundColor(.white).frame(alignment: .center)
-                Spacer()
-            }
-            .frame(height: 50.0)
-            .background(Color.blue)
-            
-            Image(systemName: "figure.arms.open")
-                .frame(width: 100.0, height: 100.0, alignment: .center)
-                .background(Color.green)
-                .cornerRadius(50.0)
-                .padding()
-            
-            if self.isLoading {
-                ProgressView()
-            } else if let userInfo = userInfo {
-                Text("\(userInfo.name) \(userInfo.surname)").font(.title)
-            } else if let error = error {
-                Text("Error: \(error.localizedDescription)")
-            }
-            
-            SettingsListRowView(model: .init(name: "Personal information")).frame(height: 40.0)
-            SettingsListRowView(model: .init(name: "Books")).frame(height: 40.0)
-            SettingsListRowView(model: .init(name: "Requests")).frame(height: 40.0)
-            SettingsListRowView(model: .init(name: "Reviews")).frame(height: 40.0)
-            
-            Button {
-                self.authService.signOut()
-            } label: {
-                Text("Log Out").bold()
-            }
-            Spacer()
-            
-        }
-        .onAppear {
-            self.isLoading = true
-            self.authService.getUser()
-                .sink { completion in
-                    self.isLoading = false
-                    switch completion {
-                    case let .failure(error):
-                        self.error = error
-                    case .finished:
-                        break
-                    }
-                } receiveValue: { userInfo in
-                    self.userInfo = userInfo
+        NavigationView {
+            VStack {
+                HStack {
+                    Spacer()
+                    Text("Profile").bold().font(.system(size: 25.0)).foregroundColor(.white).frame(alignment: .center)
+                    Spacer()
                 }
-                .store(in: &self.cancellables)
+                .frame(height: 50.0)
+                .background(Color.blue)
+                
+                Image(systemName: "figure.arms.open")
+                    .frame(width: 100.0, height: 100.0, alignment: .center)
+                    .background(Color.green)
+                    .cornerRadius(50.0)
+                    .padding()
+                
+                if self.isLoading {
+                    ProgressView()
+                } else if let userInfo = userInfo {
+                    Text("\(userInfo.name) \(userInfo.surname)").font(.title)
+                } else if let error = error {
+                    Text("Error: \(error.localizedDescription)")
+                }
+                
+                List {
+                    ForEach(self.views, id: \.id) { view in
+                        NavigationLink(destination: view) {
+                            HStack {
+                                Text(view.name)
+                                Spacer()
+                            }
+                        }
+                    }
+                }
+                
+                Button {
+                    self.authService.signOut()
+                } label: {
+                    Text("Log Out").bold()
+                }
+                Spacer()
+                
+            }
+            .onAppear {
+                self.isLoading = true
+                self.authService.getUser()
+                    .sink { completion in
+                        self.isLoading = false
+                        switch completion {
+                        case let .failure(error):
+                            self.error = error
+                        case .finished:
+                            break
+                        }
+                    } receiveValue: { userInfo in
+                        self.userInfo = userInfo
+                    }
+                    .store(in: &self.cancellables)
+            }
         }
+        
     }
 }
 

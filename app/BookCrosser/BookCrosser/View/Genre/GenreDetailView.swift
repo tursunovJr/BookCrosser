@@ -53,7 +53,7 @@ struct GenreDetailView: View {
             }
         }
         .onAppear {
-            self.bookService.gerBooks(genreUUID: self.model.uuid)
+            self.bookService.getBooks(genreUUID: self.model.uuid)
                 .sink { completion in
                     switch completion {
                     case let .failure(error):

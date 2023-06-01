@@ -36,6 +36,7 @@ struct MainView: View {
                     Label("Favourites", systemImage: "suit.heart.fill")
                 }
             ProfileView()
+                .environmentObject(self.bookService)
                 .environmentObject(self.authService)
                 .tabItem {
                     Label("Profile", systemImage: "person.crop.circle")

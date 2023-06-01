@@ -128,17 +128,40 @@ class BookGenres(Resource):
         """Get all books with specific genre"""
 
         books = db.session.query(BookInfo.uuid.label("uuid"), 
-                                BookInfo.holderID.label("holderID"),
-                                BookInfo.name.label("name"),
-                                BookInfo.author.label("author"), 
-                                BookInfo.genre.label("genre"),
-                                BookInfo.city.label("city"),
-                                BookInfo.image.label("image"), 
-                                BookInfo.description.label("description"))\
+                                  BookInfo.holderID.label("holderID"),
+                                  BookInfo.name.label("name"),
+                                  BookInfo.author.label("author"), 
+                                  BookInfo.genre.label("genre"),
+                                  BookInfo.city.label("city"), 
+                                  BookInfo.image.label("image"), 
+                                  BookInfo.description.label("description"),
+                                  BookInfo.state.label("state"))\
                 .filter(BookInfo.genre.like(str(genre_uuid))).all()
 
         if books is None or genre_uuid is None:
             abort(404, message="Book with Genre uuid={} not found"
                   .format(genre_uuid))
+
+        return make_response(200, books = books_schema.dump(books))
+    
+class BookState(Resource):
+    @staticmethod
+    def get(state):
+        """Get all books with state"""
+
+        books = db.session.query(BookInfo.uuid.label("uuid"), 
+                                  BookInfo.holderID.label("holderID"),
+                                  BookInfo.name.label("name"),
+                                  BookInfo.author.label("author"), 
+                                  BookInfo.genre.label("genre"),
+                                  BookInfo.city.label("city"), 
+                                  BookInfo.image.label("image"), 
+                                  BookInfo.description.label("description"),
+                                  BookInfo.state.label("state"))\
+                .filter(BookInfo.state.like(state)).all()
+
+        if books is None or state is None:
+            abort(404, message="Book with state={} not found"
+                  .format(state))
 
         return make_response(200, books = books_schema.dump(books))
