@@ -12,7 +12,7 @@ struct BookInfoModel: Decodable, Hashable {
     let city: String
     let description: String
     let genre: String
-    let holderID: Int
+    let holder: String
     let name: String
     let uuid: String
     let image: String
@@ -32,7 +32,7 @@ extension BookInfoModel {
               city: "Москва",
               description: "Основы С++",
               genre: "Техническая",
-              holderID: 1,
+              holder: "ztursunov@ivi.ru",
               name: "С++ для чайников",
               uuid: String(UUID().hashValue),
               image: "book",

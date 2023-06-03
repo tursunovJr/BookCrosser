@@ -28,6 +28,9 @@ struct BookDetailView: View {
     var model: BookInfoModel
     
     @State
+    var blockchain: [ChainModel] = []
+    
+    @State
     var state: Int
     
     @State
@@ -95,6 +98,7 @@ struct BookDetailView: View {
                         self.state = self.model.state
                     }
                     .store(in: &self.cancellables)
+                self.getBlockchain()
                 self.authService.listenToAuthState()
             }
         }
@@ -139,10 +143,12 @@ struct BookDetailView: View {
     
     private func shareBook() {
         // Create an instance of UIActivityViewController
-        let activityViewController = UIActivityViewController(activityItems: ["Shared Book: \(self.model.name)"], applicationActivities: nil)
+        let activityViewController = UIActivityViewController(activityItems: ["Shared Book: \(self.model.name)"],
+                                                              applicationActivities: nil)
         
         // Present the UIActivityViewController
-        UIApplication.shared.windows.first?.rootViewController?.present(activityViewController, animated: true, completion: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(activityViewController,
+                                                                        animated: true, completion: nil)
     }
     
     var bookInfo: some View {
@@ -162,7 +168,7 @@ struct BookDetailView: View {
                     .resizable()
                     .frame(width: 25.0, height: 25.0)
                     .foregroundColor(.white)
-                Text("Савелий")
+                Text(self.model.holder)
                     .font(.title3)
                     .foregroundColor(.white)
             }
@@ -184,6 +190,7 @@ struct BookDetailView: View {
             }
             .frame(height: 45.0)
             .cornerRadius(5.0)
+            
                 
             HStack {
                 Spacer(minLength: 15.0)
@@ -191,8 +198,14 @@ struct BookDetailView: View {
                     if self.state == 0 {
                         self.state = 1
                     }
+                    self.bookService.makeTransaction(model: .init(sender: self.model.holder,
+                                                                  receiver: self.authService.user?.email ?? "",
+                                                                  bookUUID: self.model.uuid))
+                    self.bookService.updateBook(holder: self.authService.user?.email ?? "",
+                                                bookUUID: self.model.uuid)
                     self.bookService.updateBook(state: self.state,
                                                 bookUUID: self.model.uuid)
+                    self.bookService.mineTranaction()
                 }
                 .foregroundColor(self.state == 0 ? Color.white : Color.black)
                 .frame(height: 45.0)
@@ -282,9 +295,24 @@ struct BookDetailView: View {
     }
     
     var bookHistory: some View {
-        Text("Book History")
-            .bold()
-            .font(.title3)
+        BookHistoryView(chain: self.blockchain).onAppear {
+            self.getBlockchain()
+        }
+    }
+    
+    private func getBlockchain() {
+        self.bookService.getChain(uuid: self.model.uuid)
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    self.error = error
+                case .finished:
+                    break
+                }
+            } receiveValue: { model in
+                self.blockchain = model
+            }
+            .store(in: &self.cancellables)
     }
     
 }

@@ -5,8 +5,8 @@
 //  Created by ztursunov on 01.06.2023.
 //
 
-import SwiftUI
 import Combine
+import SwiftUI
 
 struct RequestedBooksRowView: View {
     var id: UUID
@@ -19,6 +19,9 @@ struct RequestedBooksRowView: View {
     var error: APIServiceError?
     @State
     var cancellables = Set<AnyCancellable>()
+    
+    @State
+    private var shouldReloadBooks = false
     
     var body: some View {
         VStack {
@@ -62,7 +65,8 @@ struct RequestedBooksRowView: View {
                             .buttonStyle(PlainButtonStyle())
                             
                             Button(action: {
-                                print("[SERIK PEDIK]")
+                                self.bookService.updateBook(state: 0, bookUUID: book.uuid)
+                                self.shouldReloadBooks.toggle()
                             }) {
                                 Text("Put back")
                                     .padding(10.0)
@@ -79,19 +83,26 @@ struct RequestedBooksRowView: View {
             }
         }
         .onAppear {
-            self.bookService.getBooks(state: 1)
-                .sink { completion in
-                    switch completion {
-                    case let .failure(error):
-                        self.error = error
-                    case .finished:
-                        break
-                    }
-                } receiveValue: { model in
-                    self.bookModels = model
-                }
-                .store(in: &self.cancellables)
+            self.loadBooks()
         }
+        .onChange(of: self.shouldReloadBooks) { _ in
+            self.loadBooks()
+        }
+    }
+    
+    private func loadBooks() {
+        self.bookService.getBooks(state: 1)
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    self.error = error
+                case .finished:
+                    break
+                }
+            } receiveValue: { model in
+                self.bookModels = model
+            }
+            .store(in: &self.cancellables)
     }
 }
 
@@ -100,4 +111,3 @@ struct RequestedBooksRowView_Previews: PreviewProvider {
         RequestedBooksRowView(id: UUID(), name: "Запросы")
     }
 }
-

@@ -34,7 +34,7 @@ api.add_resource(GenresActions, "/genre/<uuid:genre_uuid>", endpoint="genre_info
 #Blockchain API Module
 api.add_resource(BlockchainTransaction, "/transaction/new")
 api.add_resource(BlockchainMine, "/mine")
-api.add_resource(BlockchainAction, "/chain/<int:bookID>", endpoint="chain")
+api.add_resource(BlockchainAction, "/chain/<string:bookID>", endpoint="chain")
 
 # JSON format for error
 @api_bp.errorhandler(HTTPException)

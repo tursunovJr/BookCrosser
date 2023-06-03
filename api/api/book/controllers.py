@@ -38,7 +38,7 @@ class Books(Resource):
     def get():
         """Получить информацию о всех книгах"""
         books = db.session.query(BookInfo.uuid.label("uuid"), 
-                                  BookInfo.holderID.label("holderID"),
+                                  BookInfo.holder.label("holder"),
                                   BookInfo.name.label("name"),
                                   BookInfo.author.label("author"), 
                                   BookInfo.genre.label("genre"),
@@ -56,7 +56,7 @@ class BooksActions(Resource):
         """Получить информацию о книге"""
 
         book_info = db.session.query(BookInfo.uuid.label("uuid"), 
-                                  BookInfo.holderID.label("holderID"),
+                                  BookInfo.holder.label("holder"),
                                   BookInfo.name.label("name"),
                                   BookInfo.author.label("author"), 
                                   BookInfo.genre.label("genre"),
@@ -128,7 +128,7 @@ class BookGenres(Resource):
         """Get all books with specific genre"""
 
         books = db.session.query(BookInfo.uuid.label("uuid"), 
-                                  BookInfo.holderID.label("holderID"),
+                                  BookInfo.holder.label("holder"),
                                   BookInfo.name.label("name"),
                                   BookInfo.author.label("author"), 
                                   BookInfo.genre.label("genre"),
@@ -150,7 +150,7 @@ class BookState(Resource):
         """Get all books with state"""
 
         books = db.session.query(BookInfo.uuid.label("uuid"), 
-                                  BookInfo.holderID.label("holderID"),
+                                  BookInfo.holder.label("holder"),
                                   BookInfo.name.label("name"),
                                   BookInfo.author.label("author"), 
                                   BookInfo.genre.label("genre"),

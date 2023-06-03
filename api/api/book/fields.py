@@ -3,7 +3,7 @@ import random
 
 class BookInfoSchema(Schema):
     uuid = fields.String(attribute="uuid")
-    holderID = fields.Integer(attribute="holderID")
+    holder = fields.String(attribute="holder")
     name = fields.String(attribute="name")
     author = fields.String(attribute="author")
     genre = fields.String(attribute="genre")
@@ -17,7 +17,7 @@ class BookInfoSchema(Schema):
     def group(self, data, many):
         return {
             "uuid": data.uuid,
-            "holderID": data.holderID,
+            "holder": data.holder,
             "name": data.name,
             "author": data.author,
             "genre": random.sample(["Техническая", "Художественная", "Научная"], 1)[0],

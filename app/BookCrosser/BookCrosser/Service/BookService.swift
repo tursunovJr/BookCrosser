@@ -17,6 +17,11 @@ protocol BookServiceProtocol {
     func getBooks(genreUUID: String) -> AnyPublisher<[BookInfoModel], APIServiceError>
     func getBooks(state: Int) -> AnyPublisher<[BookInfoModel], APIServiceError>
     func updateBook(state: Int, bookUUID: String)
+    func updateBook(holder: String, bookUUID: String)
+    func makeTransaction(model: TransactionModel)
+    func mineTranaction()
+    func getChain(uuid: String) -> AnyPublisher<[ChainModel], APIServiceError>
+    
 }
 
 final class BookService: APIService, BookServiceProtocol {
@@ -27,6 +32,10 @@ final class BookService: APIService, BookServiceProtocol {
     
     struct FavBooksResponse: Decodable {
         let favBooks: [FavBookInfoModel]
+    }
+    
+    struct Blockchain: Decodable {
+        let chain: [ChainModel]
     }
     
     func getAllBooks() -> AnyPublisher<[BookInfoModel], APIServiceError> {
@@ -224,5 +233,80 @@ final class BookService: APIService, BookServiceProtocol {
         } catch { }
         
         URLSession.shared.dataTask(with: request) { _, _, _ in }.resume()
+    }
+    
+    func updateBook(holder: String, bookUUID: String) {
+        guard let url = self.baseUrl("book/\(bookUUID)") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let params = ["holder": holder]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        } catch { }
+        
+        URLSession.shared.dataTask(with: request) { _, _, _ in }.resume()
+    }
+    
+    func makeTransaction(model: TransactionModel) {
+        guard let url = self.baseUrl("transaction/new") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let params = ["sender": model.sender,
+                      "receiver": model.receiver,
+                      "bookID": model.bookUUID]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: params, options: .prettyPrinted)
+        } catch { }
+        
+        URLSession.shared.dataTask(with: request) { _, _, _ in }.resume()
+    }
+    
+    func mineTranaction() {
+        guard let url = self.baseUrl("mine") else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { _, _, _ in }.resume()
+    }
+    
+    func getChain(uuid: String) -> AnyPublisher<[ChainModel], APIServiceError> {
+        guard let url = self.baseUrl("chain/\(uuid)") else {
+            return Fail(error: APIServiceError.undefined).eraseToAnyPublisher()
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        
+        return URLSession.shared.dataTaskPublisher(for: urlRequest)
+            .mapError { error in
+                APIServiceError.parseError(error)
+            }
+            .flatMap { data, response -> AnyPublisher<[ChainModel], APIServiceError> in
+                guard let httpResponse = response as? HTTPURLResponse,
+                      httpResponse.statusCode == 200 else {
+                    return Fail(error: APIServiceError.responseError).eraseToAnyPublisher()
+                }
+                
+                let decoder = JSONDecoder()
+                
+                return Just(data)
+                    .decode(type: Blockchain.self, decoder: decoder)
+                    .mapError { error in
+                        APIServiceError.parseError(error)
+                    }
+                    .map { $0.chain }
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
     }
 }
