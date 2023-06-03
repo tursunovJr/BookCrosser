@@ -1,7 +1,7 @@
 from marshmallow import fields, Schema, pre_dump
 
 class BlockSchema(Schema):
-    bookID = fields.Integer(attribute="bookID")
+    bookID = fields.String(attribute="bookID")
     timestamp = fields.String(attribute="timestamp")
     transactions = fields.String(attribute="transactions")
 

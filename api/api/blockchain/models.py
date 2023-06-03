@@ -9,7 +9,7 @@ class Transactions(db.Model):
 
 class Blockchain(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    bookID = db.Column(db.Integer, nullable=False)
+    bookID = db.Column(db.String, nullable=False)
     index = db.Column(db.Integer, nullable=True)
     timestamp = db.Column(db.String, nullable=True)
     transactions = db.Column(db.String, nullable=True)
